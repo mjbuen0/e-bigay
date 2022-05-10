@@ -1,0 +1,46 @@
+.text-align-left {
+    text-align: start;
+}
+
+.message-body {
+    padding: 25px;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    color: white;
+    background-color: #50d8af;
+}
+
+.nav-link {
+    color: black;
+}
+
+.nav-link:hover {
+    color: #50d8af;
+}
+
+.cut-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 250px;
+    white-space: nowrap;
+}
+
+.tab-pane {
+    padding-left: 20px;
+}
+
+.scroll {
+    height: 440px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+@media only screen and (min-width: 1920px) {
+    .scroll {
+        height: 800px;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+}

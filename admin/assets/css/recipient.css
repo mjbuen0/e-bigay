@@ -1,0 +1,55 @@
+html,
+body {
+    min-height: 100%;
+}
+
+.qr-code {
+    width: 250px;
+    margin: 10px;
+}
+
+img#profile-pic {
+    border-radius: 50%;
+    width: 200px;
+    padding-bottom: 10px
+}
+
+li,
+ul {
+    padding: 0px;
+    margin: 0px;
+
+}
+
+.personalinfo {
+    text-indent: 30%;
+}
+
+@media only screen and (max-width: 720px) {
+    .qr-code {
+        width: 150px;
+        margin: 10px;
+    }
+
+    img#profile-pic {
+        border-radius: 50%;
+        width: 150px;
+        padding-bottom: 10px
+    }
+
+    ul,
+    li {
+        font-size: 11px;
+    }
+
+    .personalinfo {
+        text-indent: 1%;
+    }
+
+    html,
+    body {
+        min-height: 100%;
+        width: 100%;
+    }
+
+}
