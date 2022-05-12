@@ -101,7 +101,7 @@
                 break;
               }
               default:{
-                echo "<li><a class='nav-link scrollto' href='LoginPage.php'>Log-In</a></li>";
+                echo "<li><a class='nav-link scrollto' href='loginpage.php'>Log-In</a></li>";
                 break;
               }
             }
@@ -117,7 +117,7 @@
     <div class="hero-content" data-aos="fade-up">
       <h2>E-Bigay handang magbigay!</h2>
       <div>
-        <a href="LoginPage.php" class="btn-projects scrollto">Donate Now!</a>
+        <a href="loginpage.php" class="btn-projects scrollto">Donate Now!</a>
       </div>
     </div>
     <div class="hero-slider swiper-container">

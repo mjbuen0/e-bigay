@@ -23,7 +23,7 @@ $(document).ready(function () {
                 title: "Success!",
                 text: "Thank you for Registering Please Verify your Email:" + usremail,
             }).then(function () {
-                window.location = "LoginPage.php";
+                window.location = "loginpage.php";
             });
         }
 
@@ -47,8 +47,8 @@ $(document).ready(function () {
             type: 'post',
             data: {
                 'registername': name,
-                'registeroccupation' : occupation,
-                'registerincome' : income,
+                'registeroccupation': occupation,
+                'registerincome': income,
                 'registerbirthdate': birthdate,
                 'registeraddress': address,
                 'registernumber': number,
@@ -129,19 +129,13 @@ $(document).ready(function () {
         return 1;
     }
 
-
     // ------------------- [ Email blur function ] -----------------
-
     $("#regemail").blur(function () {
-
         var email = $('#regemail').val();
-
         // if email is empty then return
         if (email == "") {
             return;
         }
-
-
         // send ajax request if email is not empty
         $.ajax({
             url: './assets/php/registration.php',
@@ -150,28 +144,22 @@ $(document).ready(function () {
                 'email': email,
                 'email_check': 1,
             },
-
             success: function (response) {
-
                 // clear span before error message
                 $("#registeremail_error").remove();
-
                 // adding span after email textbox with error message
                 $("#regemail").after("<span id='email_error' class='text-danger'>" + response + "</span>");
             },
-
             error: function (e) {
                 $("#result").html("Something went wrong");
             }
-
         });
     });
-    // -----------[ Clear span after clicking on inputs] -----------
 
+    // -----------[ Clear span after clicking on inputs] -----------
     $("#username").keyup(function () {
         $("#error").remove();
     });
-
 
     $("#registeremail").keyup(function () {
         $("#error").remove();

@@ -78,7 +78,7 @@
                         break;
                         }
                         default:{
-                            echo "<li><a class='nav-link scrollto' href='LoginPage.php'>Log-In</a></li>";
+                            echo "<li><a class='nav-link scrollto' href='loginpage.php'>Log-In</a></li>";
                         break;
                         }
                     }
@@ -194,6 +194,7 @@
                     <input type="text" name="donorname" id="donorname" class="form-control" value='<?php echo $name ?>'>
                     <label for="donatetype"> Type of Donation</label>
                     <input type="text" name="donatetype" id="donatetype" class="form-control" value="Cash">
+                    <span class="text-muted">Gcash Number: Antonio Miguel S. - 09206199333</span><br>
                     <label for="donatepicture">Reciept</label>
                     <input type="file" name="file" class="form-control">
                     <label for="donategendate">Date Donated</label>

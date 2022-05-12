@@ -40,7 +40,7 @@
             if(!$verified) {
                 echo '<script type="text/javascript">';
                 echo 'setTimeout(function () { swal.fire("Opps...","Verify your Email First: '.$email.'","error").then(function () {
-                    window.location = "../../LoginPage.php";
+                    window.location = "../../loginpage.php";
                 });';
                 echo '}, 500);</script>';
                 // header('location: ');
@@ -54,7 +54,7 @@
         } else {
             echo '<script type="text/javascript">';
             echo 'setTimeout(function () { swal.fire("Opps...","Incorrect username or password please try again.","error").then(function () {
-                window.location = "../../LoginPage.php";
+                window.location = "../../loginpage.php";
             });';
             echo '}, 500);</script>';
         }

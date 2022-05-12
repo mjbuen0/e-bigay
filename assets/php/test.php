@@ -7,7 +7,6 @@ require '../vendor/PHPMailerMaster/PHPMailer-master/src/PHPMailer.php';
 require '../vendor/PHPMailerMaster/PHPMailer-master/src/SMTP.php';
 
 
-function sendVerificationEmail($userEmail, $token) {
     
     $mail = new PHPMailer();
     $mail->IsSMTP(); // telling the class to use SMTP
@@ -24,7 +23,7 @@ function sendVerificationEmail($userEmail, $token) {
 
     $mail->IsHTML(true);
     $mail->setFrom('no-reply@e-bigay.com', 'E-Bigay Organization');
-    $mail->AddAddress($userEmail);
+    $mail->AddAddress("perezvj14@gmail.com");
     $mail->Subject = "Email Verification";
     $content =  '<!DOCTYPE html>
     <html lang="en">
@@ -62,10 +61,6 @@ function sendVerificationEmail($userEmail, $token) {
     } else {
     echo "Email sent successfully";
     }
-
-
-
-}
 
 
 ?>

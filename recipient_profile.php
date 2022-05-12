@@ -70,7 +70,7 @@
                         break;
                         }
                         default:{
-                            echo "<li><a class='nav-link scrollto' href='LoginPage.php'>Log-In</a></li>";
+                            echo "<li><a class='nav-link scrollto' href='loginpage.php'>Log-In</a></li>";
                         break;
                         }
                     }
