@@ -12,7 +12,7 @@ function sendVerificationEmail($userEmail, $token) {
     $mail = new PHPMailer();
     $mail->IsSMTP(); // telling the class to use SMTP
     $mail->Host       = "e-bigay.com"; // SMTP server
-    $mail->SMTPDebug  = 2;                     // enables SMTP debug information (for testing)
+    $mail->SMTPDebug  = 0;                     // enables SMTP debug information (for testing)
                                         // 1 = errors and messages
                                         // 2 = messages only
     $mail->SMTPAuth   = "true";                  // enable SMTP authentication
@@ -60,7 +60,7 @@ function sendVerificationEmail($userEmail, $token) {
     echo "Error while sending Email.";
     var_dump($mail);
     } else {
-    echo "Email sent successfully";
+
     }
 
 

@@ -115,7 +115,22 @@
   <!-- ======= hero Section ======= -->
   <section id="hero">
     <div class="hero-content" data-aos="fade-up">
-      <h2>E-Bigay handang magbigay!</h2>
+      <?php 
+        switch($isActive) {
+          case 'value':{
+            if($role == "Donor") {
+              echo "<h2>Total Accumulated Amount</h2>";
+              echo "<h2 id='time'>As of:</h2>";
+              echo "<h2 id='total-amount'>Calculating...</h2>";
+            }
+          }
+          break;
+          default:{
+            echo "<h2>E-Bigay handang magbigay!</h2>";
+          }
+          break;
+        }
+      ?>
       <div>
         <a href="loginpage.php" class="btn-projects scrollto">Donate Now!</a>
       </div>
@@ -319,6 +334,7 @@
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
   <!-- Custom JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/fetch_total_amount.js"></script>
   <?php
   if ($role == 'Recipient') {?>
     <script src="assets/js/recipient_notif.js"></script>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2022 at 06:06 AM
+-- Generation Time: May 23, 2022 at 03:53 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -43,6 +43,20 @@ INSERT INTO `admin_account` (`id`, `user`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cash_table`
+--
+
+CREATE TABLE `cash_table` (
+  `id` int(11) NOT NULL,
+  `acc_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `amount` decimal(15,2) NOT NULL,
+  `proof_of_receipt` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `donation_table`
 --
 
@@ -51,8 +65,10 @@ CREATE TABLE `donation_table` (
   `acc_id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `type_of_donation` varchar(255) DEFAULT NULL,
+  `amount` decimal(15,2) DEFAULT NULL,
   `proof_donation` varchar(255) DEFAULT NULL,
   `date_donated` varchar(255) DEFAULT NULL,
+  `status` varchar(25) NOT NULL,
   `notif_status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -60,9 +76,31 @@ CREATE TABLE `donation_table` (
 -- Dumping data for table `donation_table`
 --
 
-INSERT INTO `donation_table` (`id`, `acc_id`, `name`, `type_of_donation`, `proof_donation`, `date_donated`, `notif_status`) VALUES
-(36, 2201025, 'Vince John Perez', 'Goods', 'IMG_7793 r dv 2x2.jpg', 'April 21, 2022', 1),
-(37, 2201025, 'Vince John Perez', 'Cash', 'IMG_7793 r dv 2x2.jpg', 'April 14, 2022', 1);
+INSERT INTO `donation_table` (`id`, `acc_id`, `name`, `type_of_donation`, `amount`, `proof_donation`, `date_donated`, `status`, `notif_status`) VALUES
+(68, 2201046, 'Vince John Perez', 'Goods', '0.00', '280389823_1552450601819662_4309857574461364947_n.jpg', 'May 23, 2022', 'Received', 1),
+(69, 2201046, 'Vince John Perez', 'Cash', '3500.00', '280389823_1552450601819662_4309857574461364947_n.jpg', 'May 23, 2022', 'Being droped off', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inventory`
+--
+
+CREATE TABLE `inventory` (
+  `item_id` int(11) NOT NULL,
+  `category` varchar(255) NOT NULL,
+  `quantity` varchar(255) NOT NULL,
+  `price` decimal(15,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `inventory`
+--
+
+INSERT INTO `inventory` (`item_id`, `category`, `quantity`, `price`) VALUES
+(6, 'Testing', '100 kg', '1000.00'),
+(7, 'Testing', '100 kg', '1000.00'),
+(8, 'Canned Goods', '100', '4000.00');
 
 -- --------------------------------------------------------
 
@@ -112,8 +150,8 @@ CREATE TABLE `registered_accounts` (
 --
 
 INSERT INTO `registered_accounts` (`id`, `name`, `datebirth`, `address`, `phone`, `email`, `role`, `occupation`, `annual_income`, `verified`, `token`, `password`) VALUES
-(2201024, 'Vince John Perez', '1999-07-14', 'Quezon City', 9359148135, 'perezvj.social@gmail.com', 'Donor', '', 0, 1, '3be522ea5a7bf738a6d7c5782e32ae6c733a9e8967e24e4a1ee6f5e595dd386375b0f2bfc46c5e5498eee93c88df8b7bdd01', '356531c7cf37111656f9e782b7c5efa5'),
-(2201025, 'Vince John Perez', '1999-07-14', 'Quezon City', 9359148135, 'perezvj14@gmail.com', 'Recipient', 'IT Professional', 15000, 1, 'ddc83fc2ed9df7f4460ccf54d709202a7f41ca10482281fe5b52e37da422fc321807b3b8c378371c88eec15d6431e28b90c7', '356531c7cf37111656f9e782b7c5efa5');
+(2201025, 'Vince John Perez', '1999-07-14', 'Quezon City', 9359148135, 'perezvj14@gmail.com', 'Recipient', 'IT Professional', 15000, 1, 'ddc83fc2ed9df7f4460ccf54d709202a7f41ca10482281fe5b52e37da422fc321807b3b8c378371c88eec15d6431e28b90c7', '356531c7cf37111656f9e782b7c5efa5'),
+(2201046, 'Vince John Perez', '1999-07-14', 'Quezon City', 9359148135, 'perezvj.social@gmail.com', 'Donor', '', 0, 1, '6c6ce73e49cde41a025cf0e578fad6626211af6b91fb0c595be2a7d9d57dfd570856e359c5595bca6eae6a9f2f4aac6af51f', '356531c7cf37111656f9e782b7c5efa5');
 
 -- --------------------------------------------------------
 
@@ -138,8 +176,12 @@ CREATE TABLE `transactiontable` (
 INSERT INTO `transactiontable` (`transac_id`, `acc_id`, `name`, `date_generated`, `date_claimed`, `status`, `notif_status`) VALUES
 (42, 2201025, 'Vince John Perez', 'March 31, 2022', 'April 20, 2022', 'Claimed', 1),
 (43, 2201025, 'Vince John Perez', 'April 22, 2022', 'April 20, 2022', 'Claimed', 1),
-(44, 2201025, 'Vince John Perez', 'April 14, 2022', 'Not Yet Available', 'Pending', 0),
-(45, 2201025, 'Vince John Perez', 'April 23, 2022', 'Not Yet Available', 'Pending', 0);
+(44, 2201025, 'Vince John Perez', 'April 14, 2022', 'May 15, 2022', 'Claimed', 1),
+(45, 2201025, 'Vince John Perez', 'April 23, 2022', 'May 15, 2022', 'Claimed', 1),
+(46, 2201025, 'Vince John Perez', 'May 12, 2022', 'Not Yet Available', 'Pending', 1),
+(47, 2201025, 'Vince John Perez', 'May 27, 2022', 'Not Yet Available', 'Pending', 1),
+(48, 2201025, 'Vince John Perez', 'May 16, 2022', 'Not Yet Available', 'Pending', 1),
+(49, 2201025, 'Vince John Perez', 'January 1, 1970', 'Not Yet Available', 'Pending', 1);
 
 --
 -- Indexes for dumped tables
@@ -152,11 +194,24 @@ ALTER TABLE `admin_account`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `cash_table`
+--
+ALTER TABLE `cash_table`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `acc_id_cash_table_fk` (`acc_id`);
+
+--
 -- Indexes for table `donation_table`
 --
 ALTER TABLE `donation_table`
   ADD PRIMARY KEY (`id`),
   ADD KEY `acc_id_donation_fk` (`acc_id`);
+
+--
+-- Indexes for table `inventory`
+--
+ALTER TABLE `inventory`
+  ADD PRIMARY KEY (`item_id`);
 
 --
 -- Indexes for table `messages`
@@ -188,10 +243,22 @@ ALTER TABLE `admin_account`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `cash_table`
+--
+ALTER TABLE `cash_table`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `donation_table`
 --
 ALTER TABLE `donation_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+
+--
+-- AUTO_INCREMENT for table `inventory`
+--
+ALTER TABLE `inventory`
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `messages`
@@ -203,17 +270,23 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `registered_accounts`
 --
 ALTER TABLE `registered_accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2201026;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2201047;
 
 --
 -- AUTO_INCREMENT for table `transactiontable`
 --
 ALTER TABLE `transactiontable`
-  MODIFY `transac_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `transac_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `cash_table`
+--
+ALTER TABLE `cash_table`
+  ADD CONSTRAINT `acc_id_cash_table_fk` FOREIGN KEY (`acc_id`) REFERENCES `registered_accounts` (`id`);
 
 --
 -- Constraints for table `donation_table`

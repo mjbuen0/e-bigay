@@ -13,7 +13,7 @@ if(isset($_POST['view'])){
         while($row = mysqli_fetch_array($result)){
             $output .= '
             <li>
-            <strong><a href="http://localhost/web_dev/Ebigay/recipient_profile.php" style="text-decoration:none;padding:0px;margin:0px;">ETA of Delivery of Donation</a></strong>
+            <strong><a href="https://e-bigay.com/recipient_profile.php" style="text-decoration:none;padding:0px;margin:0px;">ETA of Delivery of Donation</a></strong>
             <p>'.$row["date_generated"].'</p>
             <hr>
             </li>

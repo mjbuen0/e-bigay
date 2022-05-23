@@ -119,11 +119,6 @@
                     <h2>
                         Admin Login
                     </h2>
-                    <p>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit obcaecati, accusantium
-                        molestias, laborum, aspernatur deserunt officia voluptatum tempora dicta quo ab ullam. Assumenda
-                        enim harum minima possimus dignissimos deserunt rem.
-                    </p>
                 </div>
                 <div class="img sign-in">
                     <img src="assets/img/undraw_different_love_a3rg.svg" alt="welcome">

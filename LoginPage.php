@@ -16,6 +16,9 @@ session_start();
     </title>
     <link href="assets/img/logo2.png" rel="icon">
     <style>
+        .text-danger {
+            color:red;
+        }
         .sign-up-div {
             height: 500px;
             overflow: auto;
@@ -43,15 +46,19 @@ session_start();
                             </div>
                             <div class="input-group">
                                 <i class='bx bxs-user'></i>
-                                <input type="text" id="regname" name="regname" placeholder="Name" required>
+                                <input type="text" id="regfname" name="regfname" placeholder="First Name" required>
+                            </div>
+                            <div class="input-group">
+                                <i class='bx bxs-user'></i>
+                                <input type="text" id="reglname" name="reglname" placeholder="Last Name" required>
                             </div>
                             <div class="input-group" id="occupationfield" hidden>
-                                <i class='bx bxs-user'></i>
+                                <i class='bx bxs-briefcase' ></i>
                                 <input type="text" id="regoccupation" name="regoccupation" placeholder="Occupaton"
                                     required>
                             </div>
                             <div class="input-group" id="incomefield" hidden>
-                                <i class='bx bxs-user'></i>
+                                <i class='bx bx-money' ></i>
                                 <input type="text" id="regincome" name="regincome" placeholder="Income" required>
                             </div>
                             <div class="input-group">

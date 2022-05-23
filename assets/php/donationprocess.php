@@ -7,25 +7,27 @@
         $target = "../../admin/assets/img/uploads";
         $tmp_name = $_FILES["file"]["tmp_name"];
 
-
-        
         $id ="";
         $name = $_POST['donorname'];
-        $sql = "SELECT id FROM registered_accounts WHERE name = '$name'";
+        $sql = "SELECT id FROM registered_accounts WHERE name = '$name' AND role = 'Donor'";
         // $sql = "SELECT id FROM donation_table";s
         $res = mysqli_query($con, $sql ); 
         while($row=mysqli_fetch_array($res)){
             $id = $row['id'];
         }
         $donateT = $_POST['donatetype'];
+        $money = $_POST['amount'];
         $image = $_FILES['file']['name'];
         $date = $_POST['donategendate'];
         $date = date("F j, Y", strtotime($date));
 
-        $sql = "INSERT INTO donation_table (acc_id, name, type_of_donation, proof_donation, date_donated) VALUES ($id, '$name', '$donateT', '$image', '$date')";
-        mysqli_query($con, $sql);
+        $insertQueryDonationTable = "INSERT INTO donation_table (acc_id, name, type_of_donation, amount, proof_donation,  date_donated, status, notif_status) VALUES ($id, '$name', '$donateT', '$money', '$image', '$date', 'Being droped off', 1)";
+        mysqli_query($con, $insertQueryDonationTable);
         move_uploaded_file($tmp_name, "$target/$image");
-
+        if ($donateT == "Cash") {
+            $insertQueryCashTable = "INSERT INTO cash_table (acc_id, name, amount, proof_of_receipt) VALUES ($id, '$name', '$money', '$image')";
+            mysqli_query($con, $insertQueryCashTable);
+        }
         if(move_uploaded_file($tmp_name, "$target/$image")) {
             echo "moved";
         } else {
@@ -33,7 +35,7 @@
             echo $con->error;
         }
         // echo $image;
-        header("Location: ../../index.php");
+        header("Location: ../../donor_profile.php");
     }
 
     function getId(){

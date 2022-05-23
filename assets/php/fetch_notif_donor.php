@@ -13,7 +13,7 @@ if(isset($_POST['view'])){
         while($row = mysqli_fetch_array($result)){
             $output .= '
             <li>
-            <strong><a href="http://localhost/web_dev/Ebigay/donor_profile.php" style="text-decoration:none;padding:0px;margin:0px;">Proof of Donation</a></strong>
+            <strong><a href="https://e-bigay.com/donor_profile.php" style="text-decoration:none;padding:0px;margin:0px;">Your Donation has Been Received</a></strong>
             <p>See the image on your Profile</p>
             <hr>
             </li>

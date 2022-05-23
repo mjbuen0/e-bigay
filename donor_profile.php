@@ -14,9 +14,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>E-Bigay | Donor Profile</title>
-    <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css%22%3E   <link rel=" stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
     <!-- Favicons -->
     <link href="assets/img/logo2.png" rel="icon">
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -26,7 +23,6 @@
         rel="stylesheet">
     <!-- Vendor CSS Files -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <link href="assets/vendor/aos/aos.css" rel="stylesheet">
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -102,7 +98,6 @@
                         }
                         while($row = $retval->fetch_assoc()) {
                             $acctid = $row['id'];
-                            // $name = $row['name'];
                             echo "<ul class='personalinfo' style='list-style-type:none; text-align: left;'>";
                             echo "<li id='name'><b>Full Name: </b>".$row['name']."</li>" ;
                             echo "<li><b>Birth Date: </b>". $row['datebirth']."</li>" ;
@@ -118,64 +113,84 @@
                     class="qr-code img-thumbnail img-responsive" hidden="true" id="qrCode" />
                 <div class="form-group d-flex justify-content-center">
                     <div class="col-sm-offset-2 col-sm-10 ">
-                        <!-- Button to generate QR Code for the entered data -->
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#donateCashModal">Donate Cash</button>
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#donateCashModal">Donate Now</button>
                     </div>
                 </div>
             </div>
         </div>
         <div>
-        <input class="form-control" id="myInput" type="text" placeholder="Search..">
-        <table class="table " >
-            <thead class="thead-dark">
-                <tr>
-                <th scope="col">Transaction ID</th>
-                <th scope="col">Date Donated</th>
-                <th scope="col">Proof of Donation</th>
-                <th scope="col">Type of Donation</th>
-                </tr>
-            </thead>
-            <tbody id="recipients">
-                <?php
-                    include('assets/php/config.php');
-                    // $sql = "SELECT id, id = (SELECT T.acc_id FROM transaction T WHERE T.acc_id = R.id AND status = 'Pending'), name, email, address, phone FROM registered_accounts R";
-                    // $sql = "SELECT * FROM transactiontable WHERE `status` = 'Claimed'";
-                    $email = $_SESSION['email'];
-                    $sql = "SELECT donation_table.id AS id, donation_table.date_donated AS date, donation_table.proof_donation AS proof, donation_table.type_of_donation AS type FROM donation_table INNER JOIN registered_accounts ON registered_accounts.id = $acctid WHERE donation_table.acc_id = $acctid ORDER BY id DESC";
-                    // $sql = "SELECT id FROM donation_table";s
-                    $res = mysqli_query($con, $sql );
-                    while($row=mysqli_fetch_array($res)){
-                        echo "<tr>";
-                            echo "<td>";echo $row['id']; echo "</td>";
-                            echo "<td>";echo $row['date']; echo "</td>";
-                            // echo "<td><button id='showimg".$row['id']."' value='".$row['id']."' data-bs-toggle='modal' data-bs-target='#exampleModal'>".$row['proof']."</button></td>";
-                            // echo "<td><a class='image-link".$row['id']."' href='admin/assets/img/uploads/".$row['proof']."'>".$row['proof']."</a></td>";
-                            echo "<td><a href='#' data-bs-toggle='modal' data-bs-target='#imgModal".$row['id']."'>".$row['proof']."</a></td>";
-                            echo "<td>";echo $row["type"]; echo "</td>";
-                        echo "</tr>";
-                        // modal
-                        echo "
-                            <div class='modal fade' id='imgModal".$row['id']."' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                <div class='modal-dialog'>
-                                    <div class='modal-content'>
-                                    <div class='modal-header'>
-                                        <h5 class='modal-title' id='exampleModalLabel'>Modal title</h5>
-                                        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                    </div>
-                                    <div class='modal-body'>
-                                        <img src='admin/assets/img/uploads/".$row['proof']."' style='width:100%;'>
-                                    </div>
-                                    <div class='modal-footer'>
-                                        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
-                                        <button type='button' class='btn btn-primary'>Save changes</button>
-                                    </div>
+            <input class="form-control w-25 mt-3" id="search-donation" type="text" placeholder="Search..">
+            <table class="display" id="list-of-donation">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Transaction ID</th>
+                        <th scope="col">Date Donated</th>
+                        <th scope="col">Proof of Donation</th>
+                        <th scope="col">Type of Donation</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="donations">
+                    <?php
+                        include('assets/php/config.php');
+                        $email = $_SESSION['email'];
+                        // $sql = "SELECT donation_table.id AS id, donation_table.date_donated AS date, donation_table.amount AS amount, donation_table.proof_donation AS proof, donation_table.type_of_donation AS type FROM donation_table INNER JOIN registered_accounts ON registered_accounts.id = $acctid WHERE donation_table.acc_id = $acctid ORDER BY id DESC";
+                        // $sql = "SELECT * FROM donation_table WHERE email = '".$_SESSION['email']."'";
+                        $getDonorAcct = "SELECT id FROM registered_accounts WHERE email = '$email'";
+                        $getDonorAcctResult = mysqli_query($con, $getDonorAcct);
+                        $id = mysqli_num_rows($getDonorAcctResult);
+                        // echo $acctid;
+                        $sql = "SELECT * FROM donation_table WHERE acc_id = '".$acctid."'";
+                        $res = mysqli_query($con, $sql );
+                        while($row=mysqli_fetch_array($res)){
+                            echo "<tr>";
+                                echo "<td>";echo $row['id']; echo "</td>";
+                                echo "<td>";echo $row['date_donated']; echo "</td>";
+                                echo "<td><a href='#' data-bs-toggle='modal' data-bs-target='#imgModal".$row['id']."'>See Image...</a></td>";
+                                echo "<td>";echo $row["type_of_donation"]; echo "</td>";
+                                if ($row['type_of_donation'] == "Goods") {
+                                    echo "<td>";echo $row["status"]; echo "</td>";
+                                } else {
+                                    echo "<td></td>";
+                                }
+                            echo "</tr>";
+                            // modal
+                            echo "
+                                <div class='modal fade' id='imgModal".$row['id']."' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                    <div class='modal-dialog'>
+                                        <div class='modal-content'>
+                                        <div class='modal-header'>
+                                            <h5 class='modal-title' id='exampleModalLabel'>Proof of Donation</h5>
+                                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                        </div>
+                                        <div class='modal-body'>
+                                            <img src='admin/assets/img/uploads/".$row['proof_donation']."' style='width:100%;'>
+                                        </div>
+                                        <div class='modal-footer'>
+                                            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
+                                            <button type='button' class='btn btn-primary'>Save changes</button>
+                                        </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ";
-                    }
-                ?>
-            </tbody>
+                            ";
+                        }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <input class="form-control w-25 mt-3" id="search-proofs" type="text" placeholder="Search..">
+            <table class="display" id="proof-of-acceptance">
+                <thead>
+                    <th scope="col">Transaction ID</th>
+                    <th scope="col">Date Donated</th>
+                    <th scope="col">Proof of Donation</th>
+                    <th scope="col">Type of Donation</th>
+                </thead>
+                <tbody id="proofs">
+
+                </tbody>
             </table>
         </div>
     </div>
@@ -191,10 +206,23 @@
             <div class="modal-body">
                 <form action="assets/php/donationprocess.php" method="POST" enctype="multipart/form-data">
                     <label for="donorname">Name of Donor</label>
-                    <input type="text" name="donorname" id="donorname" class="form-control" value='<?php echo $name ?>'>
-                    <label for="donatetype"> Type of Donation</label>
-                    <input type="text" name="donatetype" id="donatetype" class="form-control" value="Cash">
-                    <span class="text-muted">Gcash Number: Antonio Miguel S. - 09206199333</span><br>
+                    <input type="text" name="donorname" id="donorname" class="form-control" value='<?php echo $name ?>' readonly>
+                    <label for="donatetype">Type of Donation</label>
+                    <select class="form-control" name="donatetype" id="donatetype" onchange="donateType()" required>
+                        <option value="" selected disabled>Please Select...</option>
+                        <option value="Cash">Cash</option>
+                        <option value="Goods">Goods</option>
+                    </select>
+                    <div class="form-group" id="cash-group" hidden >
+                        <label for="amount">How much will you donate?</label>
+                        <input type="text" name="amount" id="amount" class="form-control" required>
+                        <span class="text-muted">Gcash Number: Antonio Miguel S. - 09206199333</span><br>
+                    </div>
+                    <div class="form-group" id="goods-group" hidden>
+                        <label for="typeofgoods">What type of goods for example: Clothes</label>
+                        <input type="text" name="typeofgoods" id="typeofgoods" class="form-control" required>
+                        <span class="text-muted">If Clothes indicate used or not for example: Clothes(Used)</span><br>
+                    </div>
                     <label for="donatepicture">Reciept</label>
                     <input type="file" name="file" class="form-control">
                     <label for="donategendate">Date Donated</label>
@@ -221,20 +249,47 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/donor_notif.js"></script>
     <script type="text/javascript">
-        $("#myInput").on("keyup", function() {
+        $('#list-of-donation').DataTable({
+            "paging": true,
+            "searching" : false,
+            "dom": '<"top"i>rt<"bottom"flp><"clear">'
+        });
+        $('#proof-of-acceptance').DataTable({
+            "paging": true,
+            "searching" : false,
+            "dom": '<"top"i>rt<"bottom"flp><"clear">'
+        });
+        $("#search-donation").on("keyup", function() {
             var value = $(this).val().toLowerCase();
-            $("#recipients tr").filter(function() {
+            $("#donations tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+        $("#search-proofs").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#proofs tr").filter(function() {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
         
     </script>
-    <!-- <script>
-        $(document).ready(function() {
-            $( ".image-link23" ).click(function() {
-                alert( "Handler for .click() called." );
-            });
-        });
-    </script> -->
+    <script>
+        function donateType() {
+            var type = document.getElementById('donatetype').value;
+            if (type == "Cash") {
+                document.getElementById('goods-group').setAttribute('hidden', 'true');
+                document.getElementById('typeofgoods').removeAttribute('required');
+
+                document.getElementById('cash-group').removeAttribute('hidden');
+                document.getElementById('amount').setAttribute('required', 'true');
+            } else {
+                document.getElementById('cash-group').setAttribute('hidden', 'true');
+                document.getElementById('amount').removeAttribute('required');
+
+                document.getElementById('goods-group').removeAttribute('hidden');
+                document.getElementById('typeofgoods').setAttribute('required', 'true');
+            }
+        }
+    </script>
 </body>
 </html>

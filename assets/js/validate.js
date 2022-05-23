@@ -9,169 +9,219 @@ $(document).ready(function () {
     // save button click function
     $("#savebtn").click(function () {
 
-        // calling validate function
+        // initiate validation function
         var response = validateForm();
-        var usremail = $("#regemail").val();
 
-        // alert("test");
-        // if form validation fails			
+        // if form validation fails
         if (response == 0) {
             return;
-        } else {
-            // window.location.href = "index.php";
-            swal.fire({
-                title: "Success!",
-                text: "Thank you for Registering Please Verify your Email:" + usremail,
-            }).then(function () {
-                window.location = "loginpage.php";
-            });
         }
 
-        // getting all form data
-        var name = $("#regname").val();
-        var occupation = $("#regoccupation").val();
-        var income = $("#regincome").val();
-        var email = $("#regemail").val();
-        var password = $("#regpassword").val();
-        var birthdate = $("#regbirthdate").val();
-        var number = $("#regnumber").val();
-        var address = $("#regaddress").val();
-        var acctrole = $('#account-role').find(":selected").text();
+        // get all the data
+        var role = $('#account-role').val();
+        var fname = $('#regfname').val();
+        var lname = $('#reglname').val();
+        var occupation = $('#regoccupation').val();
+        var income = $('#regincome').val();
+        var birthdate = $('#regbirthdate').val();
+        var address = $('#regaddress').val();
+        var number = $('#regnumber').val();
+        var email = $('#regemail').val();
+        var password = $('#regpassword').val();
 
-
-
-        // sending ajax request
         $.ajax({
-
             url: './assets/php/registration.php',
-            type: 'post',
+            type: 'POST',
             data: {
-                'registername': name,
-                'registeroccupation': occupation,
-                'registerincome': income,
-                'registerbirthdate': birthdate,
-                'registeraddress': address,
-                'registernumber': number,
-                'registeremail': email,
-                'userrole': acctrole,
-                'registerpassword': password,
-                'save': 1
+                'userrole': role,
+                'firstname': fname,
+                'lastname': lname,
+                'occupation': occupation,
+                'income': income,
+                'birthdate': birthdate,
+                'address': address,
+                'number': number,
+                'email': email,
+                'password': password,
+                'save': 1,
             },
-
-            // before ajax request
             beforeSend: function () {
-                $("#result").html("<p class='text-success'> Please wait.. </p>");
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Pleas Wait...',
+                    text: 'Submitting your form',
+                    timer: 1500,
+                    showConfirmButton: false,
+                    allowOutsideClick: false
+                });
             },
-
-            // on success response
             success: function (response) {
-                $("#result").html(response);
-
-                // reset form fields
-                $("#RegForm")[0].reset();
+                if (response == "taken") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Opps...',
+                        text: 'Your email is already registered',
+                        timer: 3000,
+                        showConfirmButton: false,
+                        allowOutsideClick: false
+                    });
+                } else {
+                    // console.log(response);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Registered',
+                        text: response,
+                        timer: 3000,
+                        showConfirmButton: false,
+                        allowOutsideClick: false
+                    }).then(() => {
+                        window.location.href = "loginpage.php";
+                    });
+                }
             },
-
-            // error response
             error: function (e) {
-                $("#result").html("Some error encountered.");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Opps...',
+                    text: 'Something went wrong',
+                    timer: 1500,
+                    showConfirmButton: false,
+                    allowOutsideClick: false
+                });
             }
-
         });
     });
 
+    // ------------------- [ Email blur function ] -----------------
 
+	$("#regemail").blur(function () {
 
+		var email = $('#regemail').val();
+
+		// if email is empty then return
+		if (email == "") {
+			return;
+		}
+
+		// send ajax request if email is not empty
+		$.ajax({
+			url: './assets/php/registration.php',
+			type: 'post',
+			data: {
+				'email': email,
+				'email_check': 1,
+			},
+			success: function (response) {
+				// clear span before error message
+				$("#email_error").remove();
+				// adding span after email textbox with error message
+				$("#regemail").after("<span id='email_error' class='text-danger'>" + response + "</span>");
+			},
+
+			error: function (e) {
+				$("#result").html("Something went wrong");
+			}
+
+		});
+	});
 
     // ------------- form validation -----------------
-
     function validateForm() {
-
         // removing span text before message
-        $("#error").remove();
-
-        if ($("#regname").val() == "") {
-            $("#regname").after("<span id='error' class='text-danger'>Enter your Name</span>");
-            return 0;
-        }
-
-        if ($("#regbirthdate").val() == "") {
-            $("#regbirthdate").after("<span id='error' class='text-danger'>Enter your Birthdate</span>");
-            return 0;
-        }
-
-        if ($("#regaddress").val() == "") {
-            $("#regaddress").after("<span id='error' class='text-danger'>Enter your Address</span>");
-            return 0;
-        }
-
-        if ($("#regnumber").val() == "") {
-            $("#regnumber").after("<span id='error' class='text-danger'>Enter your Phone Number</span>");
-            return 0;
-        }
-
-        if ($("#regemail").val() == "") {
-            $("#regemail").after("<span id='error' class='text-danger' style='color: red;>Enter your Email</span>");
-            return 0;
-        }
-
+        $('#error').remove();
 
         // validating input if empty
-        if ($("#regpassword").val() == "") {
-            $("#regpassword").after("<span id='error' class='text-danger'>Enter your Password</span>");
+        if ($('#account-role option:selected').prop('disabled')) {
+            $("#account-role").after("<span id='error' class='text-danger'>Select a Role</span>");
             return 0;
         }
 
-        if ($("#regconpassword").val() != $("#regpassword").val()) {
-            $("#regconpassword").after("<span id='error' class='text-danger' style='color: red;'>Password not match</span>");
-            return 0;
+        if($('#regfname').val() == ""){
+            $("#regfname").after("<span id='error' class='text-danger'>Please enter your first name</span>");
+			return 0;
+        }
+
+        if($('#reglname').val() == ""){
+            $("#reglname").after("<span id='error' class='text-danger'>Please enter your last name</span>");
+			return 0;
+        }
+
+        if($('#account-role').val() == "Recipient") {
+            if($('#regoccupation').val() == ""){
+                $("#regoccupation").after("<span id='error' class='text-danger'>Please enter your occupation name</span>");
+                return 0;
+            }
+            if($('#regincome').val() == ""){
+                $("#regincome").after("<span id='error' class='text-danger'>Please enter your income name</span>");
+                return 0;
+            }
+        }
+
+        if($('#regbirthdate').val() == ""){
+            $("#regbirthdate").after("<span id='error' class='text-danger'>Please enter birthdate</span>");
+			return 0;
+        }
+
+        if($('#regaddress').val() == ""){
+            $("#regaddress").after("<span id='error' class='text-danger'>Please enter your address</span>");
+			return 0;
+        }
+
+        if($('#regnumber').val() == ""){
+            $("#regnumber").after("<span id='error' class='text-danger'>Please enter your phone number</span>");
+			return 0;
+        }
+
+        if($('#regemail').val() == ""){
+            $("#regemail").after("<span id='error' class='text-danger'>Please enter your email</span>");
+			return 0;
+        }
+
+        if($('#regpassword').val() == ""){
+            $("#regpassword").after("<span id='error' class='text-danger'>Please enter your password</span>");
+			return 0;
+        } else if ($('#regpassword').val() != $('#regconpassword').val()) {
+            $("#regconpassword").after("<span id='error' class='text-danger'>Your password does not match</span>");
+			return 0;
         }
 
         return 1;
     }
 
-    // ------------------- [ Email blur function ] -----------------
-    $("#regemail").blur(function () {
-        var email = $('#regemail').val();
-        // if email is empty then return
-        if (email == "") {
-            return;
-        }
-        // send ajax request if email is not empty
-        $.ajax({
-            url: './assets/php/registration.php',
-            type: 'post',
-            data: {
-                'email': email,
-                'email_check': 1,
-            },
-            success: function (response) {
-                // clear span before error message
-                $("#registeremail_error").remove();
-                // adding span after email textbox with error message
-                $("#regemail").after("<span id='email_error' class='text-danger'>" + response + "</span>");
-            },
-            error: function (e) {
-                $("#result").html("Something went wrong");
-            }
-        });
-    });
-
     // -----------[ Clear span after clicking on inputs] -----------
-    $("#username").keyup(function () {
+    $("#account-role").change(function () {
         $("#error").remove();
     });
+    $("#regfname").keyup(function () {
+		$("#error").remove();
+	});
+	$("#reglname").keyup(function () {
+		$("#error").remove();
+	});
+    $("#regoccupation").keyup(function () {
+		$("#error").remove();
+	});
+    $("#regincome").keyup(function () {
+		$("#error").remove();
+	});
+	$("#regbirthdate").keyup(function () {
+		$("#error").remove();
+	});
+	$("#regaddress").keyup(function () {
+		$("#error").remove();
+	});
+	$("#regnumber").keyup(function () {
+		$("#error").remove();
+	});
+	$("#regemail").keyup(function () {
+		$("#error").remove();
+	});
+	$("#regpassword").keyup(function () {
+		$("#error").remove();
+	});
+	$("#regconpassword").keyup(function () {
+		$("#error").remove();
+	});
 
-    $("#registeremail").keyup(function () {
-        $("#error").remove();
-        $("span#email_error").remove();
-    });
-
-    $("#registerpassword").keyup(function () {
-        $("#error").remove();
-    });
-
-    $("#confirmpassword").keyup(function () {
-        $("#error").remove();
-    });
 
 });
