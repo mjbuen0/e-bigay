@@ -102,7 +102,7 @@
                                         <div class="col align-self-start ">
                                             <div class="row">
                                                 <div class="col">
-                                                    <input class="form-control mb-3" id="search-donation" type="text"
+                                                    <input class="form-control mb-3" id="total-amount-search" type="text"
                                                         placeholder="Search.." style="width:400px">
                                                 </div>
                                                 <div class="col d-flex justify-content-end">
@@ -607,9 +607,9 @@
             });
         });
 
-        $("#search-proofs").on("keyup", function () {
+        $("#total-amount-search").on("keyup", function () {
             var value = $(this).val().toLowerCase();
-            $("#inventory-body tr").filter(function () {
+            $("#list-amount tr").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
