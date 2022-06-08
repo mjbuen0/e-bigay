@@ -139,7 +139,11 @@
                     while($row=mysqli_fetch_array($res)){
                         echo "<tr>";
                             echo "<td>";echo $row['id']; echo "</td>";
-                            echo "<td>";echo $row['date']; echo "</td>";
+                            if($row['status'] != "Pending") {
+                                echo "<td>";echo date("F j, Y", strtotime($row['date'])); echo "</td>";
+                            } else {
+                                echo "<td>Not Yet Available</td>";
+                            }
                             echo "<td>";echo $row["status"]; echo "</td>";
                         echo "</tr>";
                     }

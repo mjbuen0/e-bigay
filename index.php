@@ -122,18 +122,23 @@
               echo "<h2>Total Accumulated Amount</h2>";
               echo "<h2 id='time'>As of:</h2>";
               echo "<h2 id='total-amount'>Calculating...</h2>";
+            } else {
+              echo "<h2>E-Bigay handang magbigay!</h2>";
             }
           }
           break;
           default:{
             echo "<h2>E-Bigay handang magbigay!</h2>";
+            echo '
+            <div>
+              <a href="loginpage.php" class="btn-projects scrollto">Donate Now!</a>
+            </div>
+            ';
           }
           break;
         }
       ?>
-      <div>
-        <a href="loginpage.php" class="btn-projects scrollto">Donate Now!</a>
-      </div>
+      
     </div>
     <div class="hero-slider swiper-container">
       <div class="swiper-wrapper">

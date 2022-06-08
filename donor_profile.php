@@ -147,11 +147,15 @@
                                 echo "<td>";echo $row['id']; echo "</td>";
                                 echo "<td>";echo $row['date_donated']; echo "</td>";
                                 echo "<td><a href='#' data-bs-toggle='modal' data-bs-target='#imgModal".$row['id']."'>See Image...</a></td>";
-                                echo "<td>";echo $row["type_of_donation"]; echo "</td>";
-                                if ($row['type_of_donation'] == "Goods") {
-                                    echo "<td>";echo $row["status"]; echo "</td>";
+                                if ($row['type_of_donation'] == "Cash") {
+                                    echo "<td>";echo $row["type_of_donation"]; echo "</td>";
                                 } else {
-                                    echo "<td></td>";
+                                    echo "<td>";echo $row["type_of_donation"]; echo "<br><a href='#' data-bs-toggle='modal' data-bs-target='#detailsModal".$row['id']."'>See Details</a></td>";
+                                }
+                                if($row['status'] == "Being droped off") {
+                                    echo "<td>Being droped off</td>";
+                                } else {
+                                    echo "<td>";echo $row['status']; echo "</td>";
                                 }
                             echo "</tr>";
                             // modal
@@ -200,7 +204,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Donate Cash</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Donate Now!</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -215,13 +219,25 @@
                     </select>
                     <div class="form-group" id="cash-group" hidden >
                         <label for="amount">How much will you donate?</label>
-                        <input type="text" name="amount" id="amount" class="form-control" required>
+                        <input type="number" name="amount" id="amount" class="form-control" required>
                         <span class="text-muted">Gcash Number: Antonio Miguel S. - 09206199333</span><br>
                     </div>
                     <div class="form-group" id="goods-group" hidden>
-                        <label for="typeofgoods">What type of goods for example: Clothes</label>
-                        <input type="text" name="typeofgoods" id="typeofgoods" class="form-control" required>
-                        <span class="text-muted">If Clothes indicate used or not for example: Clothes(Used)</span><br>
+                        <label for="typeofgoods">Type of Goods</label>
+                        <select class="form-control" name="typeofgoods" id="typeofgoods" onchange="donateType()" required>
+                            <option value="" selected disabled>Please Select...</option>
+                            <option value="Food">Food</option>
+                            <option value="Clothes">Clothes</option>
+                            <option value="Toiletries">Toiletries</option>
+                            <option value="First aid">First Aid</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="donationdescription-group" hidden>
+                        <label for="goodsdescription">Description</label>
+                        <!-- <input type="text" name="goodsdescription" id="goodsdescription" class="form-control" required> -->
+                        <textarea class="form-control" name="goodsdescription" id="goodsdescription" rows="5" style="resize:none;" required></textarea>
+                        <span class="text-muted">Note: Break down the goods that you're going to donat for example:<br>Clothes:<br>5x for boys pants<br>5x for girls dress</span><br>
                     </div>
                     <label for="donatepicture">Reciept</label>
                     <input type="file" name="file" class="form-control">
@@ -236,6 +252,7 @@
             </div>
         </div>
     </div>
+    <?php include('assets/includes/modal.php') ?>
     <!-- Vendor JS Files -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="assets/vendor/aos/aos.js"></script>
@@ -280,6 +297,9 @@
                 document.getElementById('goods-group').setAttribute('hidden', 'true');
                 document.getElementById('typeofgoods').removeAttribute('required');
 
+                document.getElementById('donationdescription-group').setAttribute('hidden', 'true');
+                document.getElementById('goodsdescription').removeAttribute('required');
+
                 document.getElementById('cash-group').removeAttribute('hidden');
                 document.getElementById('amount').setAttribute('required', 'true');
             } else {
@@ -288,8 +308,13 @@
 
                 document.getElementById('goods-group').removeAttribute('hidden');
                 document.getElementById('typeofgoods').setAttribute('required', 'true');
+
+                document.getElementById('donationdescription-group').removeAttribute('hidden');
+                document.getElementById('goodsdescription').setAttribute('required', 'true');
             }
         }
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementsByName("donategendate")[0].setAttribute('min', today);
     </script>
 </body>
 </html>

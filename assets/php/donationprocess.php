@@ -2,7 +2,7 @@
     require('config.php');
 
     session_start();
-
+    
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $target = "../../admin/assets/img/uploads";
         $tmp_name = $_FILES["file"]["tmp_name"];
@@ -16,17 +16,41 @@
             $id = $row['id'];
         }
         $donateT = $_POST['donatetype'];
+        $typeofdonation = $_POST['typeofgoods'];
+        $description = $_POST['goodsdescription'];
         $money = $_POST['amount'];
         $image = $_FILES['file']['name'];
         $date = $_POST['donategendate'];
         $date = date("F j, Y", strtotime($date));
-
-        $insertQueryDonationTable = "INSERT INTO donation_table (acc_id, name, type_of_donation, amount, proof_donation,  date_donated, status, notif_status) VALUES ($id, '$name', '$donateT', '$money', '$image', '$date', 'Being droped off', 1)";
-        mysqli_query($con, $insertQueryDonationTable);
-        move_uploaded_file($tmp_name, "$target/$image");
+        
         if ($donateT == "Cash") {
+            $insertQueryDonationTable = "INSERT INTO donation_table (acc_id, name, type_of_donation, description, proof_donation,  date_donated, status, notif_status) VALUES ($id, '$name', '$donateT', '$money', '$image', '$date', 'Received', 1)";
+            mysqli_query($con, $insertQueryDonationTable);
+            move_uploaded_file($tmp_name, "$target/$image");
+
             $insertQueryCashTable = "INSERT INTO cash_table (acc_id, name, amount, proof_of_receipt) VALUES ($id, '$name', '$money', '$image')";
             mysqli_query($con, $insertQueryCashTable);
+
+
+            $selectTotalCash = "SELECT total FROM total_cash";
+            $selectTotalCashRes = mysqli_query($con, $selectTotalCash);
+            $total = mysqli_fetch_array($selectTotalCashRes);
+            if (mysqli_num_rows($selectTotalCashRes) > 0) {
+                $insertTotal = $money + $total['total'];
+
+                $updateTotalCash = "UPDATE total_cash SET total = '$insertTotal' WHERE 1";
+                mysqli_query($con, $updateTotalCash);
+            } else {
+                $inserTotalCash = "INSERT INTO `total_cash`(`total`) VALUES ('$money')";
+                mysqli_query($con, $inserTotalCash);
+            }
+            
+
+        } else {
+            $typeofD = $donateT.": ".$typeofdonation;
+            $insertQueryDonationTable = "INSERT INTO donation_table (acc_id, name, type_of_donation, description, proof_donation,  date_donated, status, notif_status) VALUES ($id, '$name', '$typeofD', '$description', '$image', '$date', 'Being droped off', 1)";
+            mysqli_query($con, $insertQueryDonationTable);
+            move_uploaded_file($tmp_name, "$target/$image");
         }
         if(move_uploaded_file($tmp_name, "$target/$image")) {
             echo "moved";

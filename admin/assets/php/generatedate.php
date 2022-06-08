@@ -30,11 +30,11 @@
         $accountid = $_POST['accountid'];
         $nameAcct = $_POST['name'];
         $date = $_POST['gendate'];
-        $date = date("F j, Y", strtotime($date));
+        // $date = date("Y-m-d", strtotime($date));
         $sql = "INSERT INTO transactiontable (acc_id, name,  date_generated, date_claimed, status) VALUES ($accountid, '$nameAcct', '$date', 'Not Yet Available', 'Pending') ";
         $result = $con->query($sql);
         if($result) {
-            header("Location:../../index.php");
+            header("Location:../../pages/list_of_recipients.php");
         } 
         else {
             echo $con->error;

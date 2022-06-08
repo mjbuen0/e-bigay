@@ -1,0 +1,151 @@
+body {
+    background-color: #fbfbfb;
+}
+
+@media (min-width: 991.98px) {
+    main {
+        padding-left: 240px;
+    }
+}
+
+
+.navbar>.container-fluid {
+    justify-content: left;
+}
+
+.nav-header a {
+    color: #50d8af;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #ccd1d0;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: 0.25rem;
+    transition: 0.5s;
+}
+
+
+.card-alink-modal {
+    text-decoration: none;
+    color: black;
+    transition: 0.5s;
+}
+
+.card-alink-modal:hover {
+    color: #000000;
+}
+.card:hover {
+    transform: scale(1.1);
+}
+
+#search-message{
+    width: 400px;
+}
+
+.inbox-search-inbox {
+    padding-left: 192px;
+}
+
+.inbox-wrapper {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 750px;
+    padding-left:192px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 50px;
+}
+
+@media only screen and (max-width: 1366px) {
+    #search-message{
+        width: 400px;
+    }
+    .inbox-search-inbox {
+        padding-left: 70px;
+    }
+    .inbox-wrapper {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 450px;
+        padding-left: 70px;
+        padding-right: 50px;
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-gap: 25px;
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    #search-message{
+        width: 88%;
+    }
+    .inbox-wrapper {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 850px;
+        padding-left: 25px;
+        padding-right: 25px;
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-gap: 25px;
+    }
+}
+
+.p-message-body {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding: 58px 0 0;
+    /* Height of navbar */
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+    width: 240px;
+    z-index: 600;
+    width: 20%;
+}
+
+@media (max-width: 991.98px) {
+    .sidebar {
+        width: 100%;
+    }
+}
+
+.sidebar .active {
+    border-radius: 5px;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}
+
+.sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: 0.5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* Scrollable contents if viewport is shorter than content. */
+}
+
