@@ -103,7 +103,7 @@
                         $status = '<span class="text-success">Replied</span>';
                     }
                     echo '
-                        <div class="card text-bg-secondary mb-3 h-100" style="width: 20rem;">
+                        <div class="card text-bg-secondary mb-3 h-50" style="width: 20rem;">
                             <div class="card-header">
                                 <i class="fas fa-solid fa-circle fa-fw me-3 text-info badge'.$row['msg_id'].'" hidden></i><span class="nameSender">Name: '.$row["sender_name"].'</span>
                                 '.$status.'

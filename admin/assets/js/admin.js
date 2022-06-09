@@ -9,7 +9,7 @@ function complete(apt_id, transid) {
         confirmButtonText: 'Complete'
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = "../assets/php/setstatus.php?apt_id="+apt_id+"&transacid="+transid+"&event=approve";
+            window.location.href = "../assets/php/setstatus.php?apt_id=" + apt_id + "&transacid=" + transid + "&event=approve";
         }
     })
 }
@@ -25,7 +25,7 @@ function receive(id, accid) {
         confirmButtonText: 'Receive!'
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = "../assets/php/setstatus.php?apt_id="+accid+"&id="+id+"&event=receive";
+            window.location.href = "../assets/php/setstatus.php?apt_id=" + accid + "&id=" + id + "&event=receive";
         }
     })
 }
@@ -41,7 +41,7 @@ function distribute(id, accid) {
         confirmButtonText: 'Distribute!'
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = "../assets/php/setstatus.php?apt_id="+accid+"&id="+id+"&event=distribute";
+            window.location.href = "../assets/php/setstatus.php?apt_id=" + accid + "&id=" + id + "&event=distribute";
         }
     })
 }
@@ -57,7 +57,7 @@ function replied(id) {
         confirmButtonText: 'Yes!'
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = "../assets/php/setstatus.php?msgid="+id+"&event=replied";
+            window.location.href = "../assets/php/setstatus.php?msgid=" + id + "&event=replied";
         }
     })
 }
@@ -102,14 +102,14 @@ $(document).ready(function () {
                 Swal.fire({
                     icon: 'success',
                     title: 'Submitted',
-                    text: 'Your appointment has been sent.',
+                    text: 'Your item has been listed',
                     timer: 1500,
                     showConfirmButton: false,
                     allowOutsideClick: false
                 }).then(() => {
                     location.reload(true);
                 });
-                                        
+
             },
             error: function (e) {
                 Swal.fire({

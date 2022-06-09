@@ -196,7 +196,7 @@ while($row=mysqli_fetch_array($res)){
                 </div>
                 <div class="form-group ">
                     <label>Message</label>
-                    <textarea class="form-control" name="goodsdescription" id="goodsdescription" rows="5" style="resize:none;" required></textarea>
+                    <textarea class="form-control" name="message" id="message" rows="5" style="resize:none;" required></textarea>
                 </div>
                 <div class="form-group ">
                     <label>Total Cost</label>

@@ -15,7 +15,7 @@
         $message = $_POST['message'];
         
         $sql = "INSERT INTO messages (sender_name, sender_email, msg_subject, msg_body) VALUES ('$name', '$email', '$subject', '$message') ";
-        $result = $con->query($sql);
+        $result = mysqli_query($con, $sql);
         if($result){
             header("Location: ../../index.php");
         }
