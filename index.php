@@ -25,7 +25,7 @@
   <!-- Vendor CSS Files -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" >
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
@@ -268,17 +268,16 @@
       </div>
       <div class="container">
         <div class="form">
-          <form action="assets/php/getintouch.php" method="POST" >
             <?php
               switch($isActive) {
                 case 'value':{
                   ?>
                   <div class="row">
                     <div class="form-group col-md-6">
-                      <input type="text" class="form-control" name="name" id="name" value="<?php echo $name ?>" disabled>
+                      <input type="text" class="form-control" name="name" id="name" value="<?php echo $name ?>" readonly>
                     </div>
                     <div class="form-group col-md-6 mt-3 mt-md-0">
-                      <input type="email" class="form-control" name="email" id="email" value="<?php echo $email ?>" disabled>
+                      <input type="email" class="form-control" name="email" id="email" value="<?php echo $email ?>" readonly>
                     </div>
                   </div>
                   <?php
@@ -305,8 +304,7 @@
             <div class="form-group mt-3">
               <textarea class="form-control" name="message" id="message" rows="5" placeholder="Message" required></textarea>
             </div>
-            <div class="text-center"><input type="submit"  class="btn btn-success" value="Send Message"></div>
-          </form>
+            <div class="text-center"><button class="btn btn-primary" id="send">Send</button></div>
         </div>
       </div>
     </section><!-- End Contact Section -->
@@ -340,6 +338,7 @@
   <!-- Custom JS File -->
   <script src="assets/js/main.js"></script>
   <script src="assets/js/fetch_total_amount.js"></script>
+  <script src="assets/js/validatemessage.js"></script>
   <?php
   if ($role == 'Recipient') {?>
     <script src="assets/js/recipient_notif.js"></script>
@@ -349,6 +348,8 @@
   <?php
   }
   ?>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   
 </body>
 

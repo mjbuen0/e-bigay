@@ -41,7 +41,7 @@
                         <i class="fas fa-solid fa-peso-sign fa-fw me-3"></i><span>Cash Accumulated</span>
                     </a>
                     <a href="inbox.php" class="list-group-item list-group-item-action py-2 ripple message-link" aria-current="true">
-                        <i class="fas fa-solid fa-inbox fa-fw me-3"></i><span>Messages&nbsp;&nbsp;</span><span class="notification"></span>
+                        <i class="fas fa-solid fa-inbox fa-fw me-3"></i><span>Mail</span>
                     </a>
                     <a href="list_of_recipients.php" class="list-group-item list-group-item-action py-2 ripple ">
                         <i class="fas fa-users fa-fw me-3"></i><span>List of Recipients</span>

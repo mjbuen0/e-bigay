@@ -40,7 +40,7 @@
                         <i class="fas fa-solid fa-peso-sign fa-fw me-3"></i><span>Cash Accumulated</span>
                     </a>
                     <a href="inbox.php" class="list-group-item list-group-item-action py-2 ripple active message-link" aria-current="true">
-                        <i class="fas fa-solid fa-inbox fa-fw me-3"></i><span>Messages&nbsp;&nbsp;</span><span class="notification"></span>
+                        <i class="fas fa-solid fa-inbox fa-fw me-3"></i><span>Mail</span>
                     </a>
                     <a href="list_of_recipients.php" class="list-group-item list-group-item-action py-2 ripple ">
                         <i class="fas fa-users fa-fw me-3"></i><span>List of Recipients</span>
@@ -85,47 +85,16 @@
     <!--Main Navigation-->
     <!--Main layout-->
     <main style="margin-top: 100px">
-
-        <div class="inbox-search-inbox">
-            <div class="col align-self-start mb-3 mt-3">
-                <input class="form-control" id="search-message" type="text"
-                    placeholder="Search..">
-            </div>
+        <div class="container text-center">
+            <h3>To open your mail click here:</h3><br>
+            <a href="http://www.e-bigay.com/webmail" target="_blank" class="btn btn-primary btn-m">Open Mail</a>
         </div>
-        <div class="inbox-wrapper" >
-            <?php
-                $sql = "SELECT * FROM messages";
-                $res = mysqli_query($con, $sql );
-                while($row=mysqli_fetch_array($res)) {
-                    if ($row['status'] != "Replied") {
-                        $status = '<button class="btn btn-primary btn-sm" onclick="replied('.$row['msg_id'].')">Done</button>';
-                    } else {
-                        $status = '<span class="text-success">Replied</span>';
-                    }
-                    echo '
-                        <div class="card text-bg-secondary mb-3 h-50" style="width: 20rem;">
-                            <div class="card-header">
-                                <i class="fas fa-solid fa-circle fa-fw me-3 text-info badge'.$row['msg_id'].'" hidden></i><span class="nameSender">Name: '.$row["sender_name"].'</span>
-                                '.$status.'
-                            </div>
-                            <a href="#" class="card-alink-modal" data-bs-toggle="modal" data-bs-target="#meesageModal'.$row['msg_id'].'">
-                                <div class="card-body">
-                                    <h5 class="card-title h5-message-title">Subject: '.$row["msg_subject"].'</h5>
-                                    <p class="p-message-body">'.$row["msg_body"].'</p>
-                                </div>
-                            </a>
-                        </div>
-                    ';
-                }
-            ?>
-        </div>
-        <?php include_once('../assets/includes/modal.php')?>
     </main>
     <!--Main layout-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
     <script src="../assets/js/admin.js"></script>
-    <script src="../assets/js/inbox_notif.js"></script>
+    <!-- <script src="../assets/js/inbox_notif.js"></script> -->
     <script>
         $("#search-message").on("keyup", function () {
             var value = $(this).val().toLowerCase();

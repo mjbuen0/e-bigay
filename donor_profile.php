@@ -204,26 +204,26 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Donate Now!</h5>
+                <h5 class="modal-title " id="exampleModalLabel">Donate Now!</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form action="assets/php/donationprocess.php" method="POST" enctype="multipart/form-data">
-                    <label for="donorname">Name of Donor</label>
+                    <label for="donorname" class="fw-bold">Name of Donor</label>
                     <input type="text" name="donorname" id="donorname" class="form-control" value='<?php echo $name ?>' readonly>
-                    <label for="donatetype">Type of Donation</label>
+                    <label for="donatetype" class="fw-bold">Type of Donation</label>
                     <select class="form-control" name="donatetype" id="donatetype" onchange="donateType()" required>
                         <option value="" selected disabled>Please Select...</option>
                         <option value="Cash">Cash</option>
                         <option value="Goods">Goods</option>
                     </select>
                     <div class="form-group" id="cash-group" hidden >
-                        <label for="amount">How much will you donate?</label>
+                        <label for="amount" class="fw-bold">How much will you donate?</label>
                         <input type="number" name="amount" id="amount" class="form-control" required>
                         <span class="text-muted">Gcash Number: Antonio Miguel S. - 09206199333</span><br>
                     </div>
                     <div class="form-group" id="goods-group" hidden>
-                        <label for="typeofgoods">Type of Goods</label>
+                        <label for="typeofgoods" class="fw-bold">Type of Goods</label>
                         <select class="form-control" name="typeofgoods" id="typeofgoods" onchange="donateType()" required>
                             <option value="" selected disabled>Please Select...</option>
                             <option value="Food">Food</option>
@@ -234,14 +234,14 @@
                         </select>
                     </div>
                     <div class="form-group" id="donationdescription-group" hidden>
-                        <label for="goodsdescription">Description</label>
+                        <label for="goodsdescription" class="fw-bold">Description</label>
                         <!-- <input type="text" name="goodsdescription" id="goodsdescription" class="form-control" required> -->
                         <textarea class="form-control" name="goodsdescription" id="goodsdescription" rows="5" style="resize:none;" required></textarea>
                         <span class="text-muted">Note: Break down the goods that you're going to donate for example:<br>Clothes:<br>5x for boys pants<br>5x for girls dress</span><br>
                     </div>
-                    <label for="donatepicture">Reciept</label>
+                    <label for="donatepicture" class="fw-bold">Reciept</label>
                     <input type="file" name="file" class="form-control">
-                    <label for="donategendate">Date Donated</label>
+                    <label for="donategendate" class="fw-bold">Date Donated</label>
                     <input class="form-control" type="date" name="donategendate" id="donategendate">
             </div>
             <div class="modal-footer">

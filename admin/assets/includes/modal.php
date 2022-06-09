@@ -18,19 +18,19 @@
                         </div>
                         <div class="modal-body">
                             <form action="../assets/php/generatedate.php" method="POST">
-                                <label for="accountid">Account ID</label>
+                                <label for="accountid" class="fw-bold">Account ID</label>
                                 <input class="form-control mb-2" type="text" name="accountid" id="accountid"
                                     value="<?php echo $id?>" readonly="true">
-                                <label for="name">Name</label>
+                                <label for="name" class="fw-bold">Name</label>
                                 <input class="form-control mb-2" type="text" name="name" id="name" value="<?php echo $name?>"
                                     readonly="true">
-                                <label for="email">Email</label>
+                                <label for="email" class="fw-bold">Email</label>
                                 <input class="form-control mb-2" type="text" name="email" id="email" value="<?php echo $email?>"
                                     readonly="true">
-                                <label for="phone">Phone</label>
+                                <label for="phone" class="fw-bold">Phone</label>
                                 <input class="form-control mb-2" type="text" name="phone" id="phone"
                                     value="<?php echo "0".$phone?>" readonly="true">
-                                <label for="gendate">Date</label>
+                                <label for="gendate" class="fw-bold">Date</label>
                                 <input class="form-control gendate" type="date" name="gendate" id="gendate">
                         </div>
                         <div class="modal-footer">
@@ -55,15 +55,15 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>Category</label>
+                    <label class="fw-bold">Category</label>
                     <input type="text" name="category" id="category" class="form-control" value="" maxlength="50">
                 </div>
                 <div class="form-group ">
-                    <label>Quantity</label>
+                    <label class="fw-bold">Quantity</label>
                     <input type="text" name="quantity" id="quantity" class="form-control" value="" maxlength="30">
                 </div>
                 <div class="form-group">
-                    <label>Price</label>
+                    <label class="fw-bold">Price</label>
                     <input type="text" name="price" id="price" class="form-control" value="" maxlength="12">
                 </div>
                 
@@ -86,7 +86,7 @@
             <div class="modal-body">
             <form action="../assets/php/generatereport.php" method="POST">
                 <div class="form-group">
-                    <label>Month</label>
+                    <label class="fw-bold">Month</label>
                     <!-- <input type="text" name="month" id="month" class="form-control" value="" maxlength="50" required> -->
                     <select name="month" id="month" class="form-control" required>
                         <option value="" selected disabled>Please Select a Month:</option>
@@ -105,7 +105,7 @@
                     </select>
                 </div>
                 <div class="form-group ">
-                    <label>Year</label>
+                    <label class="fw-bold">Year</label>
                     <input type="text" name="year" id="year" class="form-control" value="" maxlength="30" required>
                 </div>
             </div>
@@ -191,19 +191,19 @@ while($row=mysqli_fetch_array($res)){
             <div class="modal-body">
             <form action="assets/php/sendmailtodonor.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label>Subject</label>
+                    <label class="fw-bold">Subject</label>
                     <input type="text" name="subject" id="subject" class="form-control" value="" maxlength="50" required>
                 </div>
                 <div class="form-group ">
-                    <label>Message</label>
+                    <label class="fw-bold">Message</label>
                     <textarea class="form-control" name="message" id="message" rows="5" style="resize:none;" required></textarea>
                 </div>
                 <div class="form-group ">
-                    <label>Total Cost</label>
+                    <label class="fw-bold">Total Cost</label>
                     <input type="number" name="cost" id="cost" class="form-control" value="" maxlength="30" required>
                 </div>
                 <div class="form-group ">
-                    <label>Image</label>
+                    <label class="fw-bold">Image</label>
                     <input type="file" name="attachment" class="form-control" required>
                 </div>
             </div>

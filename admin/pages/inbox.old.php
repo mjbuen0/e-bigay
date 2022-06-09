@@ -39,15 +39,15 @@
                     <a href="../index.php" class="list-group-item list-group-item-action py-2 ripple " aria-current="true">
                         <i class="fas fa-solid fa-peso-sign fa-fw me-3"></i><span>Cash Accumulated</span>
                     </a>
-                    <a href="inbox.php" class="list-group-item list-group-item-action py-2 ripple message-link" aria-current="true">
-                        <i class="fas fa-solid fa-inbox fa-fw me-3"></i><span>Mail</span>
+                    <a href="inbox.php" class="list-group-item list-group-item-action py-2 ripple active message-link" aria-current="true">
+                        <i class="fas fa-solid fa-inbox fa-fw me-3"></i><span>Messages&nbsp;&nbsp;</span><span class="notification"></span>
                     </a>
                     <a href="list_of_recipients.php" class="list-group-item list-group-item-action py-2 ripple ">
                         <i class="fas fa-users fa-fw me-3"></i><span>List of Recipients</span>
                     </a>
                     <a href="unclaimed_donations.php" class="list-group-item list-group-item-action py-2 ripple ">
                         <i class="fas fa-solid fa-clipboard fa-fw me-3"></i><span>Recipient's Unclaimed Donation</span></a>
-                    <a href="claimed_donations.php" class="list-group-item list-group-item-action py-2 ripple active"><i
+                    <a href="claimed_donations.php" class="list-group-item list-group-item-action py-2 ripple "><i
                             class="fas fa-solid fa-clipboard-check fa-fw me-3"></i><span>Claimed Donations</span></a>
                     <a href="list_of_donation.php" class="list-group-item list-group-item-action py-2 ripple">
                         <i class="fas fa-solid fa-clipboard-list fa-fw me-3"></i><span>List of Donations</span>
@@ -84,103 +84,58 @@
     </header>
     <!--Main Navigation-->
     <!--Main layout-->
-    <main style="margin-top: 58px">
-        <div class="container pt-4">
-            <div class="d-flex justify-content-center">
-                <div class="" style="width: 350px;" id="reader"></div>
+    <main style="margin-top: 100px">
+
+        <div class="inbox-search-inbox">
+            <div class="col align-self-start mb-3 mt-3">
+                <input class="form-control" id="search-message" type="text"
+                    placeholder="Search..">
             </div>
-            <div class="row" style="width:100%">
-                <div class="col align-self-start ">
-                <input class="form-control" id="search-claimed-donation" type="text"
-                    placeholder="Search.." style="width:400px">
-                </div>
-                <div class="col d-flex justify-content-end">
-                    <button type="button" style="background-color:#50d8af; border:none; color:white;"
-                        class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#genreport">
-                        Generate a Report
-                    </button>
-                </div>
-            </div>
-            <table class="display nowrap" id="claimed-donation-table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Transaction ID</th>
-                        <th scope="col">Account ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Date Claimed</th>
-                    </tr>
-                </thead>
-                <tbody id="claimed-donation-table-body">
-                    <?php
-                        // $sql = "SELECT id, id = (SELECT T.acc_id FROM transaction T WHERE T.acc_id = R.id AND status = 'Pending'), name, email, address, phone FROM registered_accounts R";
-                        // $sql = "SELECT * FROM transactiontable WHERE `status` = 'Claimed'";
-                        $sql = "SELECT transactiontable.transac_id, registered_accounts.id AS id, registered_accounts.name AS name, registered_accounts.email AS email, registered_accounts.address AS address, registered_accounts.phone AS phone, transactiontable.date_claimed AS date FROM registered_accounts INNER JOIN transactiontable ON registered_accounts.id = transactiontable.acc_id WHERE transactiontable.status = 'Claimed'";
-                        $res = mysqli_query($con, $sql );
-                        while($row=mysqli_fetch_array($res)){
-                            echo "<tr>";
-                                echo "<td>";echo $row['transac_id']; echo "</td>";
-                                echo "<td>";echo $row['id']; echo "</td>";
-                                echo "<td>";echo $row['name']; echo "</td>";
-                                echo "<td>";echo $row["email"]; echo "</td>";
-                                echo "<td>";echo "0".$row["phone"];  echo "</td>";
-                                echo "<td>";echo $row['date']; echo "</td>";
-                            echo "</tr>";
-                        }
-                    ?>
-                </tbody>
-            </table>
         </div>
-        <!-- modals -->
-        <?php include_once('../assets/includes/modal.php') ?>
+        <div class="inbox-wrapper" >
+            <?php
+                $sql = "SELECT * FROM messages";
+                $res = mysqli_query($con, $sql );
+                while($row=mysqli_fetch_array($res)) {
+                    if ($row['status'] != "Replied") {
+                        $status = '<button class="btn btn-primary btn-sm" onclick="replied('.$row['msg_id'].')">Done</button>';
+                    } else {
+                        $status = '<span class="text-success">Replied</span>';
+                    }
+                    echo '
+                        <div class="card text-bg-secondary mb-3 h-50" style="width: 20rem;">
+                            <div class="card-header">
+                                <i class="fas fa-solid fa-circle fa-fw me-3 text-info badge'.$row['msg_id'].'" hidden></i><span class="nameSender">Name: '.$row["sender_name"].'</span>
+                                '.$status.'
+                            </div>
+                            <a href="#" class="card-alink-modal" data-bs-toggle="modal" data-bs-target="#meesageModal'.$row['msg_id'].'">
+                                <div class="card-body">
+                                    <h5 class="card-title h5-message-title">Subject: '.$row["msg_subject"].'</h5>
+                                    <p class="p-message-body">'.$row["msg_body"].'</p>
+                                </div>
+                            </a>
+                        </div>
+                    ';
+                }
+            ?>
+        </div>
+        <?php include_once('../assets/includes/modal.php')?>
     </main>
     <!--Main layout-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-    <!-- <script src="../assets/js/inbox_notif.js"></script> -->
-    <script src="../assets/js/html5-qrcode.min.js"></script>
-
+    <script src="../assets/js/admin.js"></script>
+    <script src="../assets/js/inbox_notif.js"></script>
     <script>
-        var html5QrcodeScanner = new Html5QrcodeScanner(
-            "reader", {
-                fps: 10,
-                qrbox: 250
-            });
-
-        function onScanSuccess(decodedText, decodedResult) {
-            // Handle on success condition with the decoded text or result.
-            document.getElementById("search-claimed-donation").setAttribute('value', `${decodedText}`);
-            console.log(`Scan result: ${decodedText}`, decodedResult);
-
-            // ...
-            html5QrcodeScanner.clear();
-            // ^ this will stop the scanner (video feed) and clear the scan area.
-        }
-
-        $("#search-claimed-donation").on("keyup", function () {
+        $("#search-message").on("keyup", function () {
             var value = $(this).val().toLowerCase();
-            $("#claimed-donation-table-body tr").filter(function () {
+            $("div.card").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
-
-        html5QrcodeScanner.render(onScanSuccess);
-        $(document).ready(function (){
-            $('#claimed-donation-table').DataTable({
-                rowReorder: {
-                    selector: 'td:nth-child(2)'
-                },
-                responsive: true,
-                "paging": true,
-                "searching": false,
-                "dom": '<"top"i>rt<"bottom"flp><"clear">'
-            });
-        });
     </script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 
 </html>

@@ -40,7 +40,7 @@
                         <i class="fas fa-solid fa-peso-sign fa-fw me-3"></i><span>Cash Accumulated</span>
                     </a>
                     <a href="inbox.php" class="list-group-item list-group-item-action py-2 ripple message-link" aria-current="true">
-                        <i class="fas fa-solid fa-inbox fa-fw me-3"></i><span>Messages&nbsp;&nbsp;</span><span class="notification"></span>
+                        <i class="fas fa-solid fa-inbox fa-fw me-3"></i><span>Mail</span>
                     </a>
                     <a href="list_of_recipients.php" class="list-group-item list-group-item-action py-2 ripple active">
                         <i class="fas fa-users fa-fw me-3"></i><span>List of Recipients</span>
@@ -136,7 +136,7 @@
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-    <script src="../assets/js/inbox_notif.js"></script>
+    <!-- <script src="../assets/js/inbox_notif.js"></script> -->
     <script src="../assets/js/html5-qrcode.min.js"></script>
 
     <script>

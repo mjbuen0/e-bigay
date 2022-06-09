@@ -39,8 +39,8 @@
                     <a href="../index.php" class="list-group-item list-group-item-action py-2 ripple " aria-current="true">
                         <i class="fas fa-solid fa-peso-sign fa-fw me-3"></i><span>Cash Accumulated</span>
                     </a>
-                    <a href="inbox.php" class="list-group-item list-group-item-action py-2 ripple message-link message-link" aria-current="true">
-                        <i class="fas fa-solid fa-inbox fa-fw me-3"></i><span>Messages&nbsp;&nbsp;</span><span class="notification"></span>
+                    <a href="inbox.php" class="list-group-item list-group-item-action py-2 ripple message-link" aria-current="true">
+                        <i class="fas fa-solid fa-inbox fa-fw me-3"></i><span>Mail</span>
                     </a>
                     <a href="list_of_recipients.php" class="list-group-item list-group-item-action py-2 ripple ">
                         <i class="fas fa-users fa-fw me-3"></i><span>List of Recipients</span>
@@ -134,7 +134,7 @@
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-    <script src="../assets/js/inbox_notif.js"></script>
+    <!-- <script src="../assets/js/inbox_notif.js"></script> -->
     <script src="../assets/js/admin.js"></script>
     
     <script>
@@ -157,7 +157,7 @@
             });
         });
     </script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>w
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 
