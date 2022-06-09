@@ -237,7 +237,7 @@
                         <label for="goodsdescription">Description</label>
                         <!-- <input type="text" name="goodsdescription" id="goodsdescription" class="form-control" required> -->
                         <textarea class="form-control" name="goodsdescription" id="goodsdescription" rows="5" style="resize:none;" required></textarea>
-                        <span class="text-muted">Note: Break down the goods that you're going to donat for example:<br>Clothes:<br>5x for boys pants<br>5x for girls dress</span><br>
+                        <span class="text-muted">Note: Break down the goods that you're going to donate for example:<br>Clothes:<br>5x for boys pants<br>5x for girls dress</span><br>
                     </div>
                     <label for="donatepicture">Reciept</label>
                     <input type="file" name="file" class="form-control">

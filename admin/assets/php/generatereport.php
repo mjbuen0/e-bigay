@@ -71,7 +71,7 @@ if (isset($_POST['generateReport'])) {
     $pdf->AddPage();
 
     $html = '
-    
+    <h2 style="text-align:center; font-size:16px; font-weight: bold;">Donation Claimed</h2>
     <h3 style="text-align:center; font-size:16px; font-weight: bold;">Monthly report: '.$_POST['month'].' '.$year.'</h3>
     <table border="1px">
         <thead class="thead-dark">

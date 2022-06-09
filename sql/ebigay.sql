@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 06, 2022 at 10:05 AM
+-- Generation Time: Jun 09, 2022 at 04:06 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -61,7 +61,8 @@ CREATE TABLE `cash_table` (
 INSERT INTO `cash_table` (`id`, `acc_id`, `name`, `amount`, `proof_of_receipt`) VALUES
 (13, 2201046, 'Vince John Perez', '10.00', '280389823_1552450601819662_4309857574461364947_n.jpg'),
 (14, 2201046, 'Vince John Perez', '10.00', '280389823_1552450601819662_4309857574461364947_n.jpg'),
-(15, 2201046, 'Vince John Perez', '10.00', '280389823_1552450601819662_4309857574461364947_n.jpg');
+(15, 2201046, 'Vince John Perez', '10.00', '280389823_1552450601819662_4309857574461364947_n.jpg'),
+(16, 2201046, 'Vince John Perez', '3500.00', '261025453_731840891517744_3781373396581189493_n.jpg');
 
 -- --------------------------------------------------------
 
@@ -87,11 +88,15 @@ CREATE TABLE `donation_table` (
 
 INSERT INTO `donation_table` (`id`, `acc_id`, `name`, `type_of_donation`, `description`, `proof_donation`, `date_donated`, `status`, `notif_status`) VALUES
 (76, 2201046, 'Vince John Perez', 'Cash', '10', '280389823_1552450601819662_4309857574461364947_n.jpg', 'June 1, 2022', 'Received', 1),
-(77, 2201046, 'Vince John Perez', 'Goods: Clothes', '5x for boys pants\r\n5x for girls dress', 'IMG_7793 r dv 2x2.jpg', 'June 2, 2022', 'Received', 1),
+(77, 2201046, 'Vince John Perez', 'Goods: Clothes', '5x for boys pants\r\n5x for girls dress', 'IMG_7793 r dv 2x2.jpg', 'June 2, 2022', 'Distributed', 1),
 (78, 2201046, 'Vince John Perez', 'Goods: Food', '5x Sardines', 'asdasd.PNG', 'June 5, 2022', 'Received', 1),
 (79, 2201046, 'Vince John Perez', 'Goods: Toiletries', '5x Tissue Papers', 'qrcode.jpeg', 'June 8, 2022', 'Received', 1),
 (80, 2201046, 'Vince John Perez', 'Cash', '10', '280389823_1552450601819662_4309857574461364947_n.jpg', 'June 6, 2022', 'Received', 1),
-(81, 2201046, 'Vince John Perez', 'Cash', '10', '280389823_1552450601819662_4309857574461364947_n.jpg', 'June 7, 2022', 'Received', 1);
+(81, 2201046, 'Vince John Perez', 'Cash', '10', '280389823_1552450601819662_4309857574461364947_n.jpg', 'June 7, 2022', 'Received', 1),
+(82, 2201046, 'Vince John Perez', 'Goods: Clothes', '5x for boys pants', '273877905_487603052805834_7161402014926692860_n.png', 'June 10, 2022', 'Received', 0),
+(83, 2201046, 'Vince John Perez', 'Goods: Clothes', '5x for boys pants\r\n5x for girls dress', '273877905_487603052805834_7161402014926692860_n.png', 'June 9, 2022', 'Received', 0),
+(84, 2201046, 'Vince John Perez', 'Cash', '3500', '261025453_731840891517744_3781373396581189493_n.jpg', 'June 6, 2022', 'Received', 1),
+(85, 2201046, 'Vince John Perez', 'Goods: Clothes', '5x for boys pants\r\n5x for girls dress', '273877905_487603052805834_7161402014926692860_n.png', 'June 16, 2022', 'Received', 0);
 
 -- --------------------------------------------------------
 
@@ -140,7 +145,18 @@ INSERT INTO `messages` (`msg_id`, `sender_name`, `sender_email`, `msg_subject`, 
 (23, 'Vince John Perez', 'perezvj14@gmail.com', 'test', 'tasdafs', 'Replied', 1),
 (24, 'Vince John Perez', 'perezvj14@gmail.com', 'Tulong!!!!', 'Penge po Pera Please :)', 'Replied', 1),
 (25, 'Vince John Perez', 'perezvj14@gmail.com', 'Testing', 'Quisque dapibus tincidunt condimentum. Duis vehicula lectus eu risus pellentesque hendrerit. Nam nibh mauris, placerat id dignissim a, tristique sed ipsum. Nam luctus neque turpis, vel feugiat lectus fringilla at. Curabitur iaculis diam sed tortor congue,', 'Replied', 1),
-(26, 'Vince John Perez', 'perezvj14@gmail.com', 'Question', 'When will the donations will be distributed to the recipients?', 'Replied', 1);
+(26, 'Vince John Perez', 'perezvj14@gmail.com', 'Question', 'When will the donations will be distributed to the recipients?', 'Replied', 1),
+(27, 'Jettlogan', 'perezvj14@gmail.com', 'Question', 'When will the donations will be distributed to the recipients?', 'Replied', 1),
+(28, 'Jettlogan', 'perezvj14@gmail.com', 'Question', 'When will the donations will be distributed to the recipients?', 'Replied', 1),
+(29, 'Jettlogan', 'perezvj14@gmail.com', 'Question', 'When will the donations will be distributed to the recipients?', 'Replied', 1),
+(30, 'Jettlogan', 'perezvj14@gmail.com', 'Question', 'When will the donations will be distributed to the recipients?', 'Replied', 1),
+(31, 'Jettlogan', 'perezvj14@gmail.com', 'Question', 'When will the donations will be distributed to the recipients?', 'Replied', 1),
+(32, 'Jettlogan', 'perezvj14@gmail.com', 'Question', 'When will the donations will be distributed to the recipients?', 'Replied', 1),
+(33, 'Jettlogan', 'perezvj14@gmail.com', 'Question', 'When will the donations will be distributed to the recipients?', 'Replied', 1),
+(34, 'Jettlogan', 'perezvj14@gmail.com', 'Question', 'When will the donations will be distributed to the recipients?', 'Replied', 1),
+(35, 'Jettlogan', 'perezvj14@gmail.com', 'Question', 'When will the donations will be distributed to the recipients?', 'Replied', 1),
+(36, 'Jettlogan', 'perezvj14@gmail.com', 'Question', 'When will the donations will be distributed to the recipients?', 'Replied', 1),
+(37, 'Jettlogan', 'perezvj14@gmail.com', 'Question', 'When will the donations will be distributed to the recipients?', 'Replied', 1);
 
 -- --------------------------------------------------------
 
@@ -186,7 +202,7 @@ CREATE TABLE `total_cash` (
 --
 
 INSERT INTO `total_cash` (`total`) VALUES
-('10.00');
+('3510.00');
 
 -- --------------------------------------------------------
 
@@ -275,13 +291,13 @@ ALTER TABLE `admin_account`
 -- AUTO_INCREMENT for table `cash_table`
 --
 ALTER TABLE `cash_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `donation_table`
 --
 ALTER TABLE `donation_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `inventory`
@@ -293,7 +309,7 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `registered_accounts`
