@@ -135,7 +135,7 @@
                                         echo "<td>";echo $row["type"]; echo "<br><a href='#' data-bs-toggle='modal' data-bs-target='#detailsModal".$row['id']."'>See Details</a></td>";
                                     }
                                     if($row['status'] == "Being droped off") {
-                                        echo "<td>";echo $row['dstatusate']; echo "</td>";
+                                        echo "<td>";echo $row['status']; echo "</td>";
 
                                         echo "<td><button onclick='receive($id, $accid)' class='btn btn-success form-group'>Receive</button></td>";
                                     } elseif ($row['status'] == "Received" && $row['type'] != "Cash"){
